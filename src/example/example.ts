@@ -8,7 +8,7 @@ const chart = ((window as unknown as any).chart = createChart('chart', {
 		mode: CrosshairMode.Normal,
 	},
 }));
-/*
+// /*
 const lineSeries = chart.addSeries(LineSeries, {
 	color: '#000000',
 	lastPriceAnimation: LastPriceAnimationMode.Disabled,
@@ -99,7 +99,7 @@ window.setInterval(() => {
 }, 200);
 // */
 /////////// Candlestick data ///////////////
-
+// /*
 const candleSeries = chart.addSeries(CandlestickSeries, {
 	// lastPriceAnimation: LastPriceAnimationMode.Disabled,
 	// crosshairMarkerVisible: false,
@@ -110,10 +110,7 @@ const candleData = generateCandleData();
 candleSeries.setData(candleData);
 
 const primitive2 = new CountdownToClose({
-	fetchLastDataPoint: (point: any) => {
-		return point.close;
-	},
-	customLastPriceLine: false,
+	customLastPriceLine: true,
 });
 
 candleSeries.attachPrimitive(primitive2);

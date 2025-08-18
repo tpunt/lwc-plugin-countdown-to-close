@@ -44,7 +44,7 @@ abstract class CountdownToClosePriceAxisView implements ISeriesPrimitiveAxisView
 	}
 
 	backColor() {
-		return this._source.options.labelColor;
+		return this._source.options.labelColor || this._source.lastColor || 'black';
 	}
 }
 

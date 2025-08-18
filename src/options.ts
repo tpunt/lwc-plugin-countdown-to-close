@@ -2,25 +2,24 @@ import { LineStyle, Time, isBusinessDay } from 'lightweight-charts';
 
 export interface CountdownToCloseOptions {
 	//* Define the options for the primitive.
-	fillColor: string;
+	fillColor: string | null;
 	lineWidth: number;
 	lineStyle: LineStyle;
-	labelColor: string;
+	labelColor: string | null;
 	labelTextColor: string;
 	showLabels: boolean;
 	priceLabelFormatter: (price: number) => string;
 	timeLabelFormatter: (time: Time) => string;
-	fetchLastDataPoint: (point: any) => number; // Used for working with any types of series data
 	timeframeInSeconds: number;
 	customLastPriceLine: boolean;
 }
 
 export const defaultOptions: CountdownToCloseOptions = {
 	//* Define the default values for all the primitive options.
-	fillColor: 'rgba(200, 50, 100, 0.75)',
+	fillColor: null,
 	lineWidth: 1,
 	lineStyle: LineStyle.Dashed,
-	labelColor: 'rgba(200, 50, 100, 1)',
+	labelColor: null,
 	labelTextColor: 'white',
 	showLabels: true,
 	priceLabelFormatter: (price: number) => price.toFixed(2),
@@ -30,9 +29,6 @@ export const defaultOptions: CountdownToCloseOptions = {
 			? new Date(time.year, time.month, time.day)
 			: new Date(time * 1000);
 		return date.toLocaleDateString();
-	},
-	fetchLastDataPoint: (point: any) => {
-		return point.value;
 	},
 	timeframeInSeconds: 60,
 	customLastPriceLine: false,

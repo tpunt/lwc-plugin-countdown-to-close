@@ -11,6 +11,7 @@ export class CountdownToClose
 	// CountdownToCloseDataSource
 	_options: CountdownToCloseOptions;
 	_lastPrice: number | null = null;
+	_lastColor: string | null = null;
 	_timer: number | null = null;
 	_ttcc: string = '0s';
 
@@ -72,18 +73,24 @@ export class CountdownToClose
 		return this._lastPrice;
 	}
 
+	public get lastColor(): string | null {
+		return this._lastColor;
+	}
+
 	public _updateLastPrice() {
 		if (!this.series) {
 			return;
 		}
 
-		const seriesData = this.series.data();
+		const lastValueData = this.series.lastValueData(true);
 
-		if (!seriesData.length) {
-			return;
+		if (lastValueData.noData) {
+			this._lastPrice = null;
+			this._lastColor = null;
+		} else {
+			this._lastPrice = lastValueData.price;
+			this._lastColor = lastValueData.color;
 		}
-
-		this._lastPrice = this.options.fetchLastDataPoint(seriesData[seriesData.length - 1]);
 
 		// Could also fetch global last datapoint to know if historical last price data is being viewed or not
 	}
