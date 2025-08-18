@@ -21,7 +21,7 @@ export class CountdownToClosePaneView implements IPrimitivePaneView {
 	renderer() {
 		return new CountdownToClosePaneRenderer(
 			this._priceCoordinate,
-			this._source.options.fillColor || this._source.lastColor || 'black',
+			this._source.options.color || this._source.color,
 			this._source.options.lineWidth,
 			this._source.options.lineStyle,
 		);

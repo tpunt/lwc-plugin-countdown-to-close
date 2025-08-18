@@ -6,5 +6,5 @@ export interface CountdownToCloseDataSource {
 	series: ISeriesApi<keyof SeriesOptionsMap>;
 	options: CountdownToCloseOptions;
 	lastPrice: number | null;
-	lastColor: string | null;
+	color: string;
 }

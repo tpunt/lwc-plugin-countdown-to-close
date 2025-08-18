@@ -1,8 +1,6 @@
 # Countdown to Close - Lightweight Charts™ Plugin
 
-Description of the Plugin.
-
-- Developed for Lightweight Charts version: `v5.0.0`
+This plugin adds a countdown timer onto the last price line of LWC. It requires LWC version 5 or greater.
 
 ## Running Locally
 

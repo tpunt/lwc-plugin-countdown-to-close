@@ -44,7 +44,7 @@ abstract class CountdownToClosePriceAxisView implements ISeriesPrimitiveAxisView
 	}
 
 	backColor() {
-		return this._source.options.labelColor || this._source.lastColor || 'black';
+		return this._source.options.color || this._source.color;
 	}
 }
 
@@ -72,57 +72,34 @@ export class CountdownToCloseOnPriceAxisView extends CountdownToClosePriceAxisVi
 			return '';
 		}
 
-		return this._recalculateTtcc();
+		return this._source.options.timeLabelFormatter(new TimeToClose(this._source.options.timeframeInSeconds));
 	}
+}
 
-	_recalculateTtcc(): string {
-		let remainder = this._source.options.timeframeInSeconds - (
-			Math.floor(Date.now() / 1000) % this._source.options.timeframeInSeconds
+export class TimeToClose {
+	timeframeInSeconds: number;
+	timestampMilliseconds: number;
+
+	// Broken down timestamp
+	seconds: number;
+	minutes: number;
+	hours: number;
+	days: number;
+
+	constructor(timeframeInSeconds: number) {
+		this.timeframeInSeconds = timeframeInSeconds;
+		this.timestampMilliseconds = Date.now();
+
+		let timeRemainingInSeconds = timeframeInSeconds - (
+			Math.floor(this.timestampMilliseconds / 1000) % timeframeInSeconds
 		);
 
-		// TODO: figure out historical data later
-		// remainder = this._source.options.highestEndTime % this._source.options.priceData.timeframe;
-
-		// if (remainder) {
-		// 	remainder = props.priceData.timeframe - remainder;
-		// }
-
-		const ttccs = {
-			's': 0,
-			'm': 0,
-			'h': 0,
-			'd': 0,
-		};
-		let ttccNew = '';
-
-		ttccs['d'] = Math.floor(remainder / (60 * 60 * 24));
-		remainder = remainder % (60 * 60 * 24);
-		ttccs['h'] = Math.floor(remainder / (60 * 60));
-		remainder = remainder % (60 * 60);
-		ttccs['m'] = Math.floor(remainder / 60);
-		remainder = remainder % 60;
-		ttccs['s'] = Math.round(remainder);
-
-		if (ttccs['d'] != 0) {
-			ttccNew += `${ttccs['d']}d`;
-		}
-
-		if (ttccs['h'] != 0) {
-			ttccNew += `${ttccs['h']}h`;
-		}
-
-		if (ttccs['m'] != 0) {
-			ttccNew += `${ttccs['m']}m`;
-		}
-
-		if (ttccs['s'] != 0) {
-			ttccNew += `${ttccs['s']}s`;
-		}
-
-		if (ttccNew === '') {
-			ttccNew = '0s';
-		}
-
-		return ttccNew;
+		this.days = Math.floor(timeRemainingInSeconds / (60 * 60 * 24));
+		timeRemainingInSeconds = timeRemainingInSeconds % (60 * 60 * 24);
+		this.hours = Math.floor(timeRemainingInSeconds / (60 * 60));
+		timeRemainingInSeconds = timeRemainingInSeconds % (60 * 60);
+		this.minutes = Math.floor(timeRemainingInSeconds / 60);
+		timeRemainingInSeconds = timeRemainingInSeconds % 60;
+		this.seconds = Math.round(timeRemainingInSeconds);
 	}
 }

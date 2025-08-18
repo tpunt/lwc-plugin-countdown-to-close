@@ -1,6 +1,7 @@
-import { CandlestickSeries, CrosshairMode, LastPriceAnimationMode, LineSeries, createChart } from 'lightweight-charts';
+import { CandlestickSeries, CrosshairMode, LastPriceAnimationMode, LineSeries, LineStyle, createChart } from 'lightweight-charts';
 import { generateCandleData, generateLineData } from '../sample-data';
 import { CountdownToClose } from '../countdown-to-close';
+import { TimeToClose } from '../axis-view';
 
 const chart = ((window as unknown as any).chart = createChart('chart', {
 	autoSize: true,
@@ -21,6 +22,8 @@ lineSeries.setData(data);
 
 const primitive = new CountdownToClose({
 	customLastPriceLine: true,
+	timeframeInSeconds: 60 * 60 * 24 * 7,
+	color: 'red',
 });
 
 lineSeries.attachPrimitive(primitive);
@@ -103,14 +106,66 @@ window.setInterval(() => {
 const candleSeries = chart.addSeries(CandlestickSeries, {
 	// lastPriceAnimation: LastPriceAnimationMode.Disabled,
 	// crosshairMarkerVisible: false,
-	// priceLineVisible: false,
-	// lastValueVisible: false,
+	priceLineVisible: false,
+	lastValueVisible: false,
 });
 const candleData = generateCandleData();
 candleSeries.setData(candleData);
 
 const primitive2 = new CountdownToClose({
+	timeframeInSeconds: 60,
 	customLastPriceLine: true,
+	lineStyle: LineStyle.Solid,
+	// Similar to TradingView's time to close label
+	timeLabelFormatter: (timeToClose: TimeToClose): string => {
+		let ttcString = '';
+
+		// If the timeframe is greater than 1 day, show days and hours
+		if (timeToClose.timeframeInSeconds > 60 * 60 * 24) {
+			ttcString += `${timeToClose.days}d`;
+
+			if (timeToClose.hours > 0) {
+				ttcString += ` ${timeToClose.hours}h`;
+			}
+
+			return ttcString;
+		}
+
+		if (timeToClose.hours > 0) {
+			ttcString += `${timeToClose.hours}`;
+
+			if (timeToClose.hours < 10) {
+				ttcString += `0`;
+			}
+
+			ttcString += `:`;
+		}
+
+
+		if (timeToClose.minutes > 0) {
+			ttcString += `${timeToClose.minutes}`;
+
+			if (timeToClose.minutes < 10) {
+				ttcString += `0`;
+			}
+		} else {
+			ttcString += `00`;
+		}
+
+		ttcString += `:`;
+
+		if (timeToClose.seconds > 0) {
+			ttcString += `${timeToClose.seconds}`;
+
+			if (timeToClose.seconds < 10) {
+				ttcString += `0`;
+			}
+		} else {
+			ttcString += `00`;
+		}
+
+		return ttcString;
+	}
 });
 
 candleSeries.attachPrimitive(primitive2);
@@ -121,7 +176,7 @@ window.setInterval(() => {
 	const last = JSON.parse(JSON.stringify(candleData[candleData.length - 1]));
 	let rand = Math.random() * 100;
 
-	last.open = last.close
+	last.open = last.close;
 
 	if (j % 2 === 0) {
 		// Make it harder to go down when the price is "low"
