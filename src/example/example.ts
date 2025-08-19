@@ -132,36 +132,34 @@ const primitive2 = new CountdownToClose({
 		}
 
 		if (timeToClose.hours > 0) {
-			ttcString += `${timeToClose.hours}`;
-
 			if (timeToClose.hours < 10) {
-				ttcString += `0`;
+				ttcString += '0';
 			}
 
-			ttcString += `:`;
+			ttcString += `${timeToClose.hours}:`;
 		}
 
 
 		if (timeToClose.minutes > 0) {
-			ttcString += `${timeToClose.minutes}`;
-
 			if (timeToClose.minutes < 10) {
-				ttcString += `0`;
+				ttcString += '0';
 			}
+
+			ttcString += `${timeToClose.minutes}`;
 		} else {
-			ttcString += `00`;
+			ttcString += '00';
 		}
 
-		ttcString += `:`;
+		ttcString += ':';
 
 		if (timeToClose.seconds > 0) {
-			ttcString += `${timeToClose.seconds}`;
-
 			if (timeToClose.seconds < 10) {
-				ttcString += `0`;
+				ttcString += '0';
 			}
+
+			ttcString += `${timeToClose.seconds}`;
 		} else {
-			ttcString += `00`;
+			ttcString += '00';
 		}
 
 		return ttcString;
