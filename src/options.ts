@@ -1,6 +1,12 @@
 import { LineStyle } from 'lightweight-charts';
 import { TimeToClose } from './axis-view';
 
+export enum SPREAD_TYPE {
+	MIDDLE = 'middle',
+	FROM_BID = 'from_bid',
+	FROM_ASK = 'from_ask',
+}
+
 export interface CountdownToCloseOptions {
 	//* Define the options for the primitive.
 	color: string | null;
@@ -12,6 +18,11 @@ export interface CountdownToCloseOptions {
 	timeLabelFormatter: (timeToClose: TimeToClose) => string;
 	timeframeInSeconds: number;
 	customLastPriceLine: boolean;
+	spread: number;
+	spreadType: SPREAD_TYPE;
+	spreadFillColor: string;
+	displaySpread: boolean;
+	displaySpreadTextColor: string;
 }
 
 export const defaultOptions: CountdownToCloseOptions = {
@@ -62,4 +73,9 @@ export const defaultOptions: CountdownToCloseOptions = {
 	},
 	timeframeInSeconds: 60,
 	customLastPriceLine: false,
+	spread: 0,
+	spreadType: SPREAD_TYPE.MIDDLE,
+	spreadFillColor: 'rgba(255, 0, 0, 0.5)',
+	displaySpread: false,
+	displaySpreadTextColor: 'red',
 } as const;

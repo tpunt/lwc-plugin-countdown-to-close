@@ -2,11 +2,18 @@ import { CandlestickSeries, CrosshairMode, LastPriceAnimationMode, LineSeries, L
 import { generateCandleData, generateLineData } from '../sample-data';
 import { CountdownToClose } from '../countdown-to-close';
 import { TimeToClose } from '../axis-view';
+import { SPREAD_TYPE } from '../options';
 
 const chart = ((window as unknown as any).chart = createChart('chart', {
 	autoSize: true,
 	crosshair: {
 		mode: CrosshairMode.Normal,
+	},
+	timeScale: {
+		timeVisible: true,
+	},
+	rightPriceScale: {
+		// invertScale: true,
 	},
 }));
 // /*
@@ -23,12 +30,25 @@ lineSeries.setData(data);
 const primitive = new CountdownToClose({
 	customLastPriceLine: true,
 	timeframeInSeconds: 60 * 60 * 24 * 7,
+	lineStyle: LineStyle.Dotted,
 	color: 'red',
+	spread: 50,
+	spreadType: SPREAD_TYPE.MIDDLE,
+	spreadFillColor: 'rgba(255, 0, 0, 0.5)',
+	displaySpread: true,
+	displaySpreadTextColor: 'blue',
 });
 
 lineSeries.attachPrimitive(primitive);
 
 let i = 0;
+const interval = 1000;
+
+window.setInterval(() => {
+	primitive.applyOptions({
+		spread: Math.random() * 100,
+	});
+}, 2000);
 
 window.setInterval(() => {
 	const last = JSON.parse(JSON.stringify(data[data.length - 1]));
@@ -99,7 +119,7 @@ window.setInterval(() => {
 	lineSeries.update(last);
 
 	i++;
-}, 200);
+}, interval);
 // */
 /////////// Candlestick data ///////////////
 // /*
@@ -115,7 +135,7 @@ candleSeries.setData(candleData);
 const primitive2 = new CountdownToClose({
 	timeframeInSeconds: 60,
 	customLastPriceLine: true,
-	lineStyle: LineStyle.Solid,
+	lineStyle: LineStyle.Dashed,
 	// Similar to TradingView's time to close label
 	timeLabelFormatter: (timeToClose: TimeToClose): string => {
 		let ttcString = '';
@@ -243,5 +263,5 @@ window.setInterval(() => {
 	candleSeries.update(last);
 
 	j++;
-}, 200);
+}, interval);
 // */

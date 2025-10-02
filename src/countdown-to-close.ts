@@ -38,6 +38,10 @@ export class CountdownToClose
 		if (this._options.customLastPriceLine) {
 			this._priceAxisViews.push(new CountdownToCloseLastPriceOnPriceAxisView(this));
 			this._paneViews.push(new CountdownToClosePaneView(this));
+
+			if (this._options.displaySpread) {
+				this._priceAxisViews.push(new CountdownToCloseLastPriceOnPriceAxisView(this));
+			}
 		}
 
 		this._setTimer();
