@@ -4,6 +4,9 @@ import { CountdownToCloseOptions, defaultOptions } from './options';
 import { CountdownToClosePaneView } from './pane-view';
 import { PluginBase } from './plugin-base';
 
+// Re-export types for public API
+export type { CountdownToCloseOptions } from './options';
+
 export class CountdownToClose
 	extends PluginBase
 	implements CountdownToCloseDataSource

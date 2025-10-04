@@ -1,9 +1,30 @@
 {
   "name": "lwc-plugin-countdown-to-close",
+  "version": "1.0.0",
   "type": "module",
+  "main": "./dist/lwc-plugin-countdown-to-close.umd.cjs",
+  "module": "./dist/lwc-plugin-countdown-to-close.js",
+  "types": "./dist/lwc-plugin-countdown-to-close.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/lwc-plugin-countdown-to-close.d.ts",
+        "default": "./dist/lwc-plugin-countdown-to-close.js"
+      },
+      "require": {
+        "types": "./dist/lwc-plugin-countdown-to-close.d.cts",
+        "default": "./dist/lwc-plugin-countdown-to-close.umd.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --config src/vite.config.js",
-    "compile": "tsc && node compile.mjs"
+    "compile": "tsc && node compile.mjs",
+    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile"
   },
   "devDependencies": {
     "typescript": "^5.0.4",
@@ -12,6 +33,6 @@
   "dependencies": {
     "dts-bundle-generator": "^8.0.1",
     "fancy-canvas": "^2.1.0",
-    "lightweight-charts": "~5.0.0"
+    "lightweight-charts": "~5.0.9"
   }
 }

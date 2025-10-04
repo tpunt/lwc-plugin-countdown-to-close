@@ -2,7 +2,21 @@
 
 This plugin adds a countdown timer onto the last price line of LWC. It requires LWC version 5 or greater.
 
-## Running Locally
+## Installation
+
+```bash
+npm install lwc-plugin-countdown-to-close
+```
+
+## Usage
+
+```ts
+import { CountdownToClose, CountdownToCloseOptions } from 'lwc-plugin-countdown-to-close';
+```
+
+## Development
+
+### Running Locally
 
 ```shell
 npm install
@@ -11,13 +25,17 @@ npm run dev
 
 Visit `localhost:5173` in the browser.
 
-## Compiling
+### Building the Package
 
-```shell
+```bash
 npm run compile
 ```
 
-Check the output in the `dist` folder.
+This will:
+1. Compile TypeScript to JavaScript
+2. Bundle the plugin for both ES modules and UMD
+3. Generate TypeScript type definitions
+4. Output everything to the `dist/` folder
 
 ## Publishing To NPM
 
