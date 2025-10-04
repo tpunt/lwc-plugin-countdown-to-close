@@ -6,6 +6,7 @@ import { PluginBase } from './plugin-base';
 
 // Re-export types for public API
 export type { CountdownToCloseOptions } from './options';
+export { SPREAD_TYPE } from './options';
 
 export class CountdownToClose
 	extends PluginBase
