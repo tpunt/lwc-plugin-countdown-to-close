@@ -19,6 +19,7 @@ export class CountdownToClosePaneView implements IPrimitivePaneView {
 
 		if (this._source.options.spread === 0) {
 			this._bidPriceCoordinate = this._source.series.priceToCoordinate(this._source.lastPrice);
+			this._askPriceCoordinate = null;
 		} else {
 			switch (this._source.options.spreadType) {
 				case SPREAD_TYPE.MIDDLE:
