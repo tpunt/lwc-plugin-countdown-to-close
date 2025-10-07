@@ -43,7 +43,7 @@ export class CountdownToClosePaneView implements IPrimitivePaneView {
 			this._bidPriceCoordinate,
 			this._askPriceCoordinate,
 			this._source.options.spreadFillColor,
-			this._source.options.displaySpread ? String(this._source.options.spread) : '',
+			this._source.options.displaySpreadText ? String(this._source.options.spread) : '',
 			this._source.options.displaySpreadTextColor,
 			this._source.options.color || this._source.color,
 			this._source.options.lineWidth,

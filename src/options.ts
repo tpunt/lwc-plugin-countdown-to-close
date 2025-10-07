@@ -18,10 +18,10 @@ export interface CountdownToCloseOptions {
 	timeLabelFormatter: (timeToClose: TimeToClose) => string;
 	timeframeInSeconds: number;
 	customLastPriceLine: boolean;
-	spread: number;
+	spread: number; // If > 0, display the spread box
 	spreadType: SPREAD_TYPE;
 	spreadFillColor: string;
-	displaySpread: boolean;
+	displaySpreadText: boolean;
 	displaySpreadTextColor: string;
 }
 
@@ -76,6 +76,6 @@ export const defaultOptions: CountdownToCloseOptions = {
 	spread: 0,
 	spreadType: SPREAD_TYPE.MIDDLE,
 	spreadFillColor: 'rgba(255, 0, 0, 0.5)',
-	displaySpread: false,
+	displaySpreadText: false,
 	displaySpreadTextColor: 'red',
 } as const;

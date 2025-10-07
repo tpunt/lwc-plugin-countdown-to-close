@@ -35,7 +35,7 @@ const primitive = new CountdownToClose({
 	spread: 50,
 	spreadType: SPREAD_TYPE.MIDDLE,
 	spreadFillColor: 'rgba(255, 0, 0, 0.5)',
-	displaySpread: true,
+	displaySpreadText: true,
 	displaySpreadTextColor: 'blue',
 });
 

@@ -43,7 +43,7 @@ export class CountdownToClose
 			this._priceAxisViews.push(new CountdownToCloseLastPriceOnPriceAxisView(this));
 			this._paneViews.push(new CountdownToClosePaneView(this));
 
-			if (this._options.displaySpread) {
+			if (this._options.spread > 0) {
 				this._priceAxisViews.push(new CountdownToCloseLastPriceOnPriceAxisView(this));
 			}
 		}
