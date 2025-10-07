@@ -11,7 +11,7 @@ npm install lwc-plugin-countdown-to-close
 ## Usage
 
 ```ts
-import { CountdownToClose, CountdownToCloseOptions, SPREAD_TYPE } from 'lwc-plugin-countdown-to-close';
+import { CountdownToClose, CountdownToCloseOptions, SPREAD_TYPE, TimeToClose } from 'lwc-plugin-countdown-to-close';
 ```
 
 ## Development
