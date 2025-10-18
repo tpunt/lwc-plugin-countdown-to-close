@@ -69,7 +69,7 @@ export const defaultOptions: CountdownToCloseOptions = {
 			return ttcString;
 		}
 
-		return ` ${timeToClose.seconds}s`;
+		return `${timeToClose.seconds}s`;
 	},
 	timeframeInSeconds: 60,
 	customLastPriceLine: false,
