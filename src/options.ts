@@ -8,16 +8,19 @@ export enum SPREAD_TYPE {
 }
 
 export interface CountdownToCloseOptions {
-	//* Define the options for the primitive.
-	color: string | null;
-	lineWidth: number;
-	lineStyle: LineStyle;
-	labelTextColor: string;
-	showLabels: boolean;
-	priceLabelFormatter: (price: number) => string;
-	timeLabelFormatter: (timeToClose: TimeToClose) => string;
-	timeframeInSeconds: number;
+	// Whether to use a custom price line instead of the default LWC last price line. If true, disable the LWC last
+	// price line by setting `priceLineVisible` and `lastValueVisible` to false on the series.
 	customLastPriceLine: boolean;
+	color: string | null; // Line and label color (default is null, which means use the last series point color)
+	lineWidth: number; // If customLastPriceLine is true, this is the width of the custom price line
+	lineStyle: LineStyle; // If customLastPriceLine is true, this is the style of the custom price line
+	labelTextColor: string; // Color of the label text
+	showLabels: boolean; // Whether to show the price labels
+	priceLabelFormatter: (price: number) => string; // Formatter for the price label
+	timeLabelFormatter: (timeToClose: TimeToClose) => string; // Formatter for the time label
+	timeframeInSeconds: number; // The timeframe of the series (in seconds)
+
+	// Experimental spread displaying as a box between the bid and ask prices
 	spread: number; // If > 0, display the spread box
 	spreadType: SPREAD_TYPE;
 	spreadFillColor: string;
