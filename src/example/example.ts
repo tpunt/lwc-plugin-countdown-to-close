@@ -2,7 +2,6 @@ import { CandlestickSeries, CrosshairMode, LastPriceAnimationMode, LineSeries, L
 import { generateCandleData, generateLineData } from '../sample-data';
 import { CountdownToClose } from '../countdown-to-close';
 import { TimeToClose } from '../axis-view';
-import { SPREAD_TYPE } from '../options';
 
 const chart = ((window as unknown as any).chart = createChart('chart', {
 	autoSize: true,
@@ -32,23 +31,12 @@ const primitive = new CountdownToClose({
 	timeframeInSeconds: 60 * 60 * 24 * 7,
 	lineStyle: LineStyle.Dotted,
 	color: 'red',
-	spread: 50,
-	spreadType: SPREAD_TYPE.MIDDLE,
-	spreadFillColor: 'rgba(255, 0, 0, 0.5)',
-	displaySpreadText: true,
-	displaySpreadTextColor: 'blue',
 });
 
 lineSeries.attachPrimitive(primitive);
 
 let i = 0;
 const interval = 1000;
-
-window.setInterval(() => {
-	primitive.applyOptions({
-		spread: Math.random() * 100,
-	});
-}, 2000);
 
 window.setInterval(() => {
 	const last = JSON.parse(JSON.stringify(data[data.length - 1]));

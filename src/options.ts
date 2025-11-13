@@ -1,12 +1,6 @@
 import { LineStyle } from 'lightweight-charts';
 import { TimeToClose } from './axis-view';
 
-export enum SPREAD_TYPE {
-	MIDDLE = 'middle',
-	FROM_BID = 'from_bid',
-	FROM_ASK = 'from_ask',
-}
-
 export interface CountdownToCloseOptions {
 	// Whether to use a custom price line instead of the default LWC last price line. If true, disable the LWC last
 	// price line by setting `priceLineVisible` and `lastValueVisible` to false on the series.
@@ -19,13 +13,6 @@ export interface CountdownToCloseOptions {
 	priceLabelFormatter: (price: number) => string; // Formatter for the price label
 	timeLabelFormatter: (timeToClose: TimeToClose) => string; // Formatter for the time label
 	timeframeInSeconds: number; // The timeframe of the series (in seconds)
-
-	// Experimental spread displaying as a box between the bid and ask prices
-	spread: number; // If > 0, display the spread box
-	spreadType: SPREAD_TYPE;
-	spreadFillColor: string;
-	displaySpreadText: boolean;
-	displaySpreadTextColor: string;
 }
 
 export const defaultOptions: CountdownToCloseOptions = {
@@ -76,9 +63,4 @@ export const defaultOptions: CountdownToCloseOptions = {
 	},
 	timeframeInSeconds: 60,
 	customLastPriceLine: false,
-	spread: 0,
-	spreadType: SPREAD_TYPE.MIDDLE,
-	spreadFillColor: 'rgba(255, 0, 0, 0.5)',
-	displaySpreadText: false,
-	displaySpreadTextColor: 'red',
 } as const;

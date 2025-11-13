@@ -6,7 +6,6 @@ import { PluginBase } from './plugin-base';
 
 // Re-export types for public API
 export type { CountdownToCloseOptions } from './options';
-export { SPREAD_TYPE } from './options';
 export { TimeToClose } from './axis-view';
 
 export class CountdownToClose
@@ -43,10 +42,6 @@ export class CountdownToClose
 		if (this._options.customLastPriceLine) {
 			this._priceAxisViews.push(new CountdownToCloseLastPriceOnPriceAxisView(this));
 			this._paneViews.push(new CountdownToClosePaneView(this));
-
-			if (this._options.spread > 0) {
-				this._priceAxisViews.push(new CountdownToCloseLastPriceOnPriceAxisView(this));
-			}
 		}
 
 		this._setTimer();

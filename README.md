@@ -7,9 +7,6 @@ Features:
  - Customise the last price label (background colour, text colour, price formatting)
  - Customise the countdown timer (e.g. to display `1m 12s`, `01:12`, etc)
 
-Spread displaying is also included (a customisable box is displayed between the max bid/min ask). This is
-**experimental** and therefore subject to change.
-
 ## Installation
 
 ```bash
@@ -19,7 +16,7 @@ npm install lwc-plugin-countdown-to-close
 ## Usage
 
 ```ts
-import { CountdownToClose, CountdownToCloseOptions, SPREAD_TYPE, TimeToClose } from 'lwc-plugin-countdown-to-close';
+import { CountdownToClose, CountdownToCloseOptions, TimeToClose } from 'lwc-plugin-countdown-to-close';
 ```
 
 ## Visual Demo
