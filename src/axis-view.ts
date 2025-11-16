@@ -102,4 +102,20 @@ export class TimeToClose {
 		timeRemainingInSeconds = timeRemainingInSeconds % 60;
 		this.seconds = Math.round(timeRemainingInSeconds);
 	}
+
+	outputTimeframe() {
+		if (this.timeframeInSeconds % (60 * 60 * 24) === 0) {
+			return `${this.timeframeInSeconds / (60 * 60 * 24)}d`;
+		}
+
+		if (this.timeframeInSeconds % (60 * 60) === 0) {
+			return `${this.timeframeInSeconds / (60 * 60)}h`;
+		}
+
+		if (this.timeframeInSeconds % 60 === 0) {
+			return `${this.timeframeInSeconds / 60}m`;
+		}
+
+		return `${this.timeframeInSeconds}s`;
+	}
 }

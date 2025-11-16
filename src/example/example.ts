@@ -31,6 +31,12 @@ const primitive = new CountdownToClose({
 	timeframeInSeconds: 60 * 60 * 24 * 7,
 	lineStyle: LineStyle.Dotted,
 	color: 'red',
+	countdownTimers: [3 * 60, 15 * 60, 4 * 60 * 60],
+	countdownTimersTextColor: '#000',
+	countdownTimersTextFontSize: 25,
+	countdownTimersTextFromTop: 5,
+	countdownTimersTextFromLeft: -5,
+	countdownTimersSameLine: false,
 });
 
 lineSeries.attachPrimitive(primitive);

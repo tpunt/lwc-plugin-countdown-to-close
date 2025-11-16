@@ -13,6 +13,14 @@ export interface CountdownToCloseOptions {
 	priceLabelFormatter: (price: number) => string; // Formatter for the price label
 	timeLabelFormatter: (timeToClose: TimeToClose) => string; // Formatter for the time label
 	timeframeInSeconds: number; // The timeframe of the series (in seconds)
+
+	// Show countdown timers on the chart
+	countdownTimers: number[]; // Timeframes to show countdown timers for (in seconds)
+	countdownTimersTextColor: string; // Color of the countdown timer
+	countdownTimersTextFontSize: number; // Font size of the countdown timer text
+	countdownTimersTextFromTop: number; // If negative, then from bottom
+	countdownTimersTextFromLeft: number; // If negative, then from right
+	countdownTimersSameLine: boolean; // True for all on the same line, false for each on a new line
 }
 
 export const defaultOptions: CountdownToCloseOptions = {
@@ -63,4 +71,12 @@ export const defaultOptions: CountdownToCloseOptions = {
 	},
 	timeframeInSeconds: 60,
 	customLastPriceLine: false,
+
+	// Countdown timers
+	countdownTimers: [],
+	countdownTimersTextColor: '#000',
+	countdownTimersTextFontSize: 25,
+	countdownTimersTextFromTop: 5,
+	countdownTimersTextFromLeft: -5,
+	countdownTimersSameLine: true,
 } as const;
