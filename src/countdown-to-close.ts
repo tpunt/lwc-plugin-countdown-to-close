@@ -46,6 +46,8 @@ export class CountdownToClose
 			this._paneViews.push(new CountdownToClosePaneView(this));
 		}
 
+		this._options.otherLines = this._options.otherLines.slice(); // Force a copy to be able to detect future changes
+
 		this.setOtherLines();
 		this._setTimer();
 	}
@@ -102,6 +104,10 @@ export class CountdownToClose
 		}
 
 		this._options = { ...this._options, ...options };
+
+		if (options.otherLines !== undefined) {
+			this._options.otherLines = options.otherLines.slice(); // Force a copy to be able to detect future changes
+		}
 
 		if (otherLinesChanged) {
 			this.setOtherLines();
