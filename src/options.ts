@@ -21,6 +21,17 @@ export interface CountdownToCloseOptions {
 	countdownTimersTextFromTop: number; // If negative, then from bottom
 	countdownTimersTextFromLeft: number; // If negative, then from right
 	countdownTimersSameLine: boolean; // True for all on the same line, false for each on a new line
+
+	// Show other lines on the chart, relative to the current price
+	otherLinesVisible: boolean;
+	otherLines: string[]; // E.g. in terms of points or percentages: [20, 40, 0.75%, 1.8%]
+	otherLinesColor: string;
+	otherLinesWidth: number;
+	otherLinesStyle: LineStyle;
+	otherLinesTextColor: string;
+	otherLinesTextSize: number;
+	otherLinesShowLabels: boolean; // Whether to display the price labels
+	otherLinesLabelTextColor: string;
 }
 
 export const defaultOptions: CountdownToCloseOptions = {
@@ -79,4 +90,15 @@ export const defaultOptions: CountdownToCloseOptions = {
 	countdownTimersTextFromTop: 5,
 	countdownTimersTextFromLeft: -5,
 	countdownTimersSameLine: true,
+
+	// Show other lines on the chart, relative to the current price
+	otherLinesVisible: false,
+	otherLines: [],
+	otherLinesColor: '#000000',
+	otherLinesWidth: 1,
+	otherLinesStyle: LineStyle.Dashed,
+	otherLinesTextColor: '#000000',
+	otherLinesTextSize: 12,
+	otherLinesShowLabels: false,
+	otherLinesLabelTextColor: '#000000',
 } as const;

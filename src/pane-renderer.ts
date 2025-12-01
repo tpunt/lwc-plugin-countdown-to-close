@@ -7,15 +7,18 @@ export class CountdownToClosePaneRenderer implements IPrimitivePaneRenderer {
 	_priceCoordinate: Coordinate | null;
 	_lineFillColor: string;
 	_options: CountdownToCloseOptions;
+	_lastPriceDelta: string = '';
 
 	constructor(
 		priceCoordinate: Coordinate | null,
 		lineFillColor: string,
 		options: CountdownToCloseOptions,
+		lastPriceDelta: string = '',
 	) {
 		this._priceCoordinate = priceCoordinate;
 		this._lineFillColor = lineFillColor;
 		this._options = options;
+		this._lastPriceDelta = lastPriceDelta;
 	}
 
 	draw(target: CanvasRenderingTarget2D, utils: DrawingUtils) {
@@ -43,6 +46,14 @@ export class CountdownToClosePaneRenderer implements IPrimitivePaneRenderer {
 			ctx.beginPath();
 			ctx.moveTo(0, y1);
 			ctx.lineTo(scope.bitmapSize.width, y1);
+
+			// if lastPriceDelta is not empty, add the text to the line
+			if (this._lastPriceDelta !== '') {
+				ctx.textAlign = 'right';
+				ctx.font = `${this._options.otherLinesTextSize}px Arial`;
+				ctx.fillStyle = this._options.otherLinesTextColor;
+				ctx.fillText(this._lastPriceDelta, scope.bitmapSize.width - 5, y1);
+			}
 
 			ctx.stroke();
 		});

@@ -14,7 +14,14 @@ const chart = ((window as unknown as any).chart = createChart('chart', {
 	rightPriceScale: {
 		// invertScale: true,
 	},
+	layout: {
+		background: {
+			color: '#ccc',
+		},
+	},
 }));
+const interval = 500;
+
 // /*
 const lineSeries = chart.addSeries(LineSeries, {
 	color: '#000000',
@@ -42,7 +49,6 @@ const primitive = new CountdownToClose({
 lineSeries.attachPrimitive(primitive);
 
 let i = 0;
-const interval = 1000;
 
 window.setInterval(() => {
 	const last = JSON.parse(JSON.stringify(data[data.length - 1]));
@@ -177,7 +183,16 @@ const primitive2 = new CountdownToClose({
 		}
 
 		return ttcString;
-	}
+	},
+	otherLinesVisible: true,
+	otherLines: ['20', '40', '0.75%', '1.8%'],
+	otherLinesColor: '#000',
+	otherLinesWidth: 1,
+	otherLinesStyle: LineStyle.Dashed,
+	otherLinesShowLabels: true,
+	otherLinesTextColor: '#0000ff',
+	otherLinesTextSize: 15,
+	otherLinesLabelTextColor: '#00ff00',
 });
 
 candleSeries.attachPrimitive(primitive2);
@@ -186,34 +201,35 @@ let j = 0;
 // /*
 window.setInterval(() => {
 	const last = JSON.parse(JSON.stringify(candleData[candleData.length - 1]));
-	let rand = Math.random() * 100;
+	const randMultiplier = 3;
+	let rand = Math.random() * randMultiplier;
 
 	last.open = last.close;
 
 	if (j % 2 === 0) {
 		// Make it harder to go down when the price is "low"
 
-		if (rand > 50) {
+		if (rand > 0.50 * randMultiplier) {
 			if (last.value > 800) {
-				rand -= 50;
+				rand -= 0.50 * randMultiplier;
 			}
 		}
 
-		if (rand > 25) {
+		if (rand > 0.25 * randMultiplier) {
 			if (last.value > 900) {
-				rand -= 25;
+				rand -= 0.25 * randMultiplier;
 			}
 		}
 
-		if (rand > 10) {
+		if (rand > 0.10 * randMultiplier) {
 			if (last.value > 950) {
-				rand -= 10;
+				rand -= 0.10 * randMultiplier;
 			}
 		}
 
-		if (rand > 5) {
+		if (rand > 0.05 * randMultiplier) {
 			if (last.value > 975) {
-				rand -= 5;
+				rand -= 0.05 * randMultiplier;
 			}
 		}
 
@@ -221,27 +237,27 @@ window.setInterval(() => {
 	} else {
 		// Make it harder to go down when the price is "low"
 
-		if (rand > 50) {
+		if (rand > 0.50 * randMultiplier) {
 			if (last.value < 200) {
-				rand -= 50;
+				rand -= 0.50 * randMultiplier;
 			}
 		}
 
-		if (rand > 25) {
+		if (rand > 0.25 * randMultiplier) {
 			if (last.value < 100) {
-				rand -= 25;
+				rand -= 0.25 * randMultiplier;
 			}
 		}
 
-		if (rand > 10) {
+		if (rand > 0.10 * randMultiplier) {
 			if (last.value < 50) {
-				rand -= 10;
+				rand -= 0.10 * randMultiplier;
 			}
 		}
 
-		if (rand > 5) {
+		if (rand > 0.05 * randMultiplier) {
 			if (last.value < 25) {
-				rand -= 5;
+				rand -= 0.05 * randMultiplier;
 			}
 		}
 

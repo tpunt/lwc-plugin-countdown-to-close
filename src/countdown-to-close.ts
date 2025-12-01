@@ -22,6 +22,8 @@ export class CountdownToClose
 	// Views
 	_paneViews: CountdownToClosePaneView[];
 	_priceAxisViews: CountdownToCloseLastPriceOnPriceAxisView[];
+	_otherLinesPaneViews: CountdownToClosePaneView[] = [];
+	_otherLinesPriceAxisViews: CountdownToCloseLastPriceOnPriceAxisView[] = [];
 
 	constructor(
 		options: Partial<CountdownToCloseOptions> = {}
@@ -44,7 +46,27 @@ export class CountdownToClose
 			this._paneViews.push(new CountdownToClosePaneView(this));
 		}
 
+		this.setOtherLines();
 		this._setTimer();
+	}
+
+	private setOtherLines() {
+		this._otherLinesPaneViews = [];
+		this._otherLinesPriceAxisViews = [];
+
+		if (!this._options.otherLinesVisible) {
+			return;
+		}
+
+		for (const lastPriceDelta of this._options.otherLines) {
+			this._otherLinesPaneViews.push(new CountdownToClosePaneView(this, lastPriceDelta));
+			this._otherLinesPaneViews.push(new CountdownToClosePaneView(this, '-' + lastPriceDelta));
+
+			if (this._options.otherLinesShowLabels) {
+				this._otherLinesPriceAxisViews.push(new CountdownToCloseLastPriceOnPriceAxisView(this, lastPriceDelta));
+				this._otherLinesPriceAxisViews.push(new CountdownToCloseLastPriceOnPriceAxisView(this, '-' + lastPriceDelta));
+			}
+		}
 	}
 
 	updateAllViews() {
@@ -52,16 +74,18 @@ export class CountdownToClose
 
 		this._paneViews.forEach(pw => pw.update());
 		this._priceAxisViews.forEach(pw => pw.update());
+		this._otherLinesPaneViews.forEach(pw => pw.update());
+		this._otherLinesPriceAxisViews.forEach(pw => pw.update());
 	}
 
 	priceAxisViews() {
 		//* Labels rendered on the price scale
-		return this._priceAxisViews;
+		return this._priceAxisViews.concat(this._otherLinesPriceAxisViews);
 	}
 
 	paneViews() {
 		//* rendering on the main chart pane
-		return this._paneViews;
+		return this._paneViews.concat(this._otherLinesPaneViews);
 	}
 
 	public get options(): CountdownToCloseOptions {
@@ -69,7 +93,20 @@ export class CountdownToClose
 	}
 
 	applyOptions(options: Partial<CountdownToCloseOptions>) {
+		let otherLinesChanged = false;
+
+		if (options.otherLines !== undefined && JSON.stringify(options.otherLines) !== JSON.stringify(this._options.otherLines)) {
+			otherLinesChanged = true;
+		} else if (options.otherLinesVisible !== undefined && options.otherLinesVisible !== this._options.otherLinesVisible) {
+			otherLinesChanged = true;
+		}
+
 		this._options = { ...this._options, ...options };
+
+		if (otherLinesChanged) {
+			this.setOtherLines();
+		}
+
 		this.requestUpdate();
 	}
 

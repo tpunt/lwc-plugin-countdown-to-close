@@ -1,14 +1,17 @@
 import { Coordinate, ISeriesPrimitiveAxisView } from 'lightweight-charts';
 import { CountdownToCloseDataSource } from './data-source';
+import { calculatePriceDelta } from './helpers/price-calculation';
 
 abstract class CountdownToClosePriceAxisView implements ISeriesPrimitiveAxisView {
 	_source: CountdownToCloseDataSource;
 	_pos: Coordinate | null = null;
-	_delta: Coordinate;
+	_labelPositionDelta: Coordinate;
+	_lastPriceDelta: string = '';
 
-	constructor(source: CountdownToCloseDataSource, delta: Coordinate) {
+	constructor(source: CountdownToCloseDataSource, labelPositionDelta: Coordinate, lastPriceDelta: string = '') {
 		this._source = source;
-		this._delta = delta;
+		this._labelPositionDelta = labelPositionDelta;
+		this._lastPriceDelta = lastPriceDelta;
 	}
 
 	update() {
@@ -16,13 +19,13 @@ abstract class CountdownToClosePriceAxisView implements ISeriesPrimitiveAxisView
 			return;
 		}
 
-		this._pos = this._source.series.priceToCoordinate(this._source.lastPrice);
+		this._pos = this._source.series.priceToCoordinate(calculatePriceDelta(this._source.lastPrice, this._lastPriceDelta));
 
 		if (this._pos === null) {
 			return;
 		}
 
-		this._pos = (this._pos + this._delta) as Coordinate;
+		this._pos = (this._pos + this._labelPositionDelta) as Coordinate;
 	}
 
 	abstract text(): string;
@@ -40,17 +43,17 @@ abstract class CountdownToClosePriceAxisView implements ISeriesPrimitiveAxisView
 	}
 
 	textColor() {
-		return this._source.options.labelTextColor;
+		return this._lastPriceDelta === '' ? this._source.options.labelTextColor : this._source.options.otherLinesLabelTextColor;
 	}
 
 	backColor() {
-		return this._source.options.color || this._source.color;
+		return this._lastPriceDelta === '' ? (this._source.options.color || this._source.color) : this._source.options.otherLinesColor;
 	}
 }
 
 export class CountdownToCloseLastPriceOnPriceAxisView extends CountdownToClosePriceAxisView {
-	constructor(source: CountdownToCloseDataSource) {
-		super(source, 0 as Coordinate);
+	constructor(source: CountdownToCloseDataSource, lastPriceDelta: string = '') {
+		super(source, 0 as Coordinate, lastPriceDelta);
 	}
 
 	text() {
@@ -58,13 +61,17 @@ export class CountdownToCloseLastPriceOnPriceAxisView extends CountdownToClosePr
 			return '';
 		}
 
-		return this._source.options.priceLabelFormatter(this._source.lastPrice);
+		return this._source.options.priceLabelFormatter(calculatePriceDelta(this._source.lastPrice, this._lastPriceDelta));
+	}
+
+	visible() {
+		return this._lastPriceDelta === '' ? this._source.options.showLabels : this._source.options.otherLinesShowLabels;
 	}
 }
 
 export class CountdownToCloseOnPriceAxisView extends CountdownToClosePriceAxisView {
 	constructor(source: CountdownToCloseDataSource) {
-		super(source, 20 as Coordinate);
+		super(source, 20 as Coordinate, '');
 	}
 
 	text() {
