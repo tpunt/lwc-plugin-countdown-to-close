@@ -36,12 +36,14 @@ export class CountdownToClosePaneRenderer implements IPrimitivePaneRenderer {
 			}
 
 			const ctx = scope.context;
+			let lineWidth = this._lastPriceDelta === '' ? this._options.lineWidth : this._options.otherLinesWidth;
+			let lineStyle = this._lastPriceDelta === '' ? this._options.lineStyle : this._options.otherLinesStyle;
 
 			ctx.lineCap = 'butt';
 			ctx.strokeStyle = this._lineFillColor;
 			ctx.fillStyle = this._lineFillColor;
-			ctx.lineWidth = Math.floor(this._options.lineWidth * scope.horizontalPixelRatio);
-			utils.setLineStyle(ctx, this._options.lineStyle);
+			ctx.lineWidth = Math.floor(lineWidth * scope.horizontalPixelRatio);
+			utils.setLineStyle(ctx, lineStyle);
 
 			ctx.beginPath();
 			ctx.moveTo(0, y1);
