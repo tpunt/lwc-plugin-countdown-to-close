@@ -101,6 +101,8 @@ export class CountdownToClose
 			otherLinesChanged = true;
 		} else if (options.otherLinesVisible !== undefined && options.otherLinesVisible !== this._options.otherLinesVisible) {
 			otherLinesChanged = true;
+		} else if (options.otherLinesShowLabels !== undefined && options.otherLinesShowLabels !== this._options.otherLinesShowLabels) {
+			otherLinesChanged = true;
 		}
 
 		this._options = { ...this._options, ...options };
