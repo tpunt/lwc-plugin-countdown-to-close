@@ -31,7 +31,15 @@ abstract class CountdownToClosePriceAxisView implements ISeriesPrimitiveAxisView
 	abstract text(): string;
 
 	coordinate() {
-		return this._pos ?? -1;
+		return -100000; // Some random, large negative number to ensure the axis view is not displayed
+	}
+
+	fixedCoordinate() {
+		if (this._pos === null) {
+			return -1;
+		}
+
+		return this._pos;
 	}
 
 	visible(): boolean {
