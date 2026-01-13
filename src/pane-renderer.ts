@@ -67,18 +67,18 @@ export class CountdownToClosePaneRenderer implements IPrimitivePaneRenderer {
 		}
 
 		const ctx = scope.context;
-		let textFromLeft = this._options.countdownTimersTextFromLeft;
-		let textFromTop = this._options.countdownTimersTextFromTop;
+		let textFromLeft = this._options.countdownTimersTextFromLeft * scope.horizontalPixelRatio;
+		let textFromTop = this._options.countdownTimersTextFromTop * scope.verticalPixelRatio;
 		let textAlign: CanvasTextAlign = 'left';
 		let textBaseline: CanvasTextBaseline = 'top';
 
 		if (this._options.countdownTimersTextFromTop < 0) {
-			textFromTop = scope.bitmapSize.height + this._options.countdownTimersTextFromTop;
+			textFromTop = scope.bitmapSize.height + this._options.countdownTimersTextFromTop * scope.verticalPixelRatio;
 			textBaseline = 'bottom';
 		}
 
 		if (this._options.countdownTimersTextFromLeft < 0) {
-			textFromLeft = scope.bitmapSize.width + this._options.countdownTimersTextFromLeft;
+			textFromLeft = scope.bitmapSize.width + this._options.countdownTimersTextFromLeft * scope.horizontalPixelRatio;
 			textAlign = 'right';
 		}
 		// Save context state to avoid being affected by previous operations
