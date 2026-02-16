@@ -2,8 +2,10 @@ import { LineStyle } from 'lightweight-charts';
 import { TimeToClose } from './axis-view';
 
 export interface CountdownToCloseOptions {
-	// Whether to use a custom price line instead of the default LWC last price line. If true, disable the LWC last
-	// price line by setting `priceLineVisible` and `lastValueVisible` to false on the series.
+	// Last price line and countdown label options
+	// Either use a custom price line (allows customisations) or the default LWC last price line. If true, then make
+	// sure to disable the LWC last price line by setting `priceLineVisible` and `lastValueVisible` to `false` on the
+	// series.
 	customLastPriceLine: boolean;
 	color: string | null; // Line and label color (default is null, which means use the last series point color)
 	lineWidth: number; // If customLastPriceLine is true, this is the width of the custom price line

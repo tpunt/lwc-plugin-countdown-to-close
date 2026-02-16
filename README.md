@@ -2,10 +2,15 @@
 
 This plugin adds a countdown timer onto the last price line of LWC. It requires LWC version `5.0.9` or greater.
 
-Features:
- - Customise the last price line (style, thickness, colour)
- - Customise the last price label (background colour, text colour, price formatting)
- - Customise the countdown timer (e.g. to display `1m 12s`, `01:12`, etc)
+Features (3):
+ 1. Last price line and countdown timer:
+   - Customise the line (style, thickness, colour) and label (background colour, text colour, price formatting)
+   - Customise the countdown timer (e.g. to display `1m 12s`, `01:12`, etc)
+ 1. Add a list of countdown timers to the chart (any timeframes)
+ 1. Display additional horizontal lines relative to the last price (by fixed points or percentages)
+
+The following demonstrates all 3 features (last price line with countdown timer, top-right for a list of other countdown timers, and blue lines 40 points away from the last price):
+![demo](https://github.com/user-attachments/assets/f8c321e1-1659-44ba-bacb-14b30fb65044)
 
 ## Installation
 

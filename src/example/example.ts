@@ -1,5 +1,5 @@
-import { CandlestickSeries, CrosshairMode, LastPriceAnimationMode, LineSeries, LineStyle, createChart } from 'lightweight-charts';
-import { generateCandleData, generateLineData } from '../sample-data';
+import { CandlestickSeries, CrosshairMode, LineStyle, createChart } from 'lightweight-charts';
+import { generateCandleData } from '../sample-data';
 import { CountdownToClose } from '../countdown-to-close';
 import { TimeToClose } from '../axis-view';
 
@@ -20,9 +20,9 @@ const chart = ((window as unknown as any).chart = createChart('chart', {
 		},
 	},
 }));
-const interval = 500;
+const interval = 200;
 
-// /*
+/*
 const lineSeries = chart.addSeries(LineSeries, {
 	color: '#000000',
 	lastPriceAnimation: LastPriceAnimationMode.Disabled,
@@ -132,10 +132,18 @@ const candleSeries = chart.addSeries(CandlestickSeries, {
 const candleData = generateCandleData();
 candleSeries.setData(candleData);
 
-const primitive2 = new CountdownToClose({
-	timeframeInSeconds: 60,
+const primitive = new CountdownToClose({
 	customLastPriceLine: true,
-	lineStyle: LineStyle.Dashed,
+	timeframeInSeconds: 60,
+	lineStyle: LineStyle.Dotted,
+	// color: 'blue',
+	countdownTimers: [3 * 60, 15 * 60, 4 * 60 * 60],
+	countdownTimersTextColor: '#000',
+	countdownTimersTextFontSize: 25,
+	countdownTimersTextFromTop: 5,
+	countdownTimersTextFromLeft: -5,
+	countdownTimersSameLine: false,
+	// showLabels: false,
 	// Similar to TradingView's time to close label
 	timeLabelFormatter: (timeToClose: TimeToClose): string => {
 		let ttcString = '';
@@ -185,17 +193,29 @@ const primitive2 = new CountdownToClose({
 		return ttcString;
 	},
 	otherLinesVisible: true,
-	otherLines: ['20', '40', '0.75%', '1.8%'],
-	otherLinesColor: '#000',
-	otherLinesWidth: 1,
-	otherLinesStyle: LineStyle.Dashed,
-	otherLinesShowLabels: true,
-	otherLinesTextColor: '#0000ff',
-	otherLinesTextSize: 15,
-	otherLinesLabelTextColor: '#00ff00',
+    otherLines: ['40'],
+    otherLinesColor: '#0000ff',
+    otherLinesWidth: 1,
+    otherLinesStyle: LineStyle.Dashed,
+    otherLinesTextColor: '#0000ff',
+    otherLinesTextSize: 12,
+    otherLinesShowLabels: true,
+    otherLinesLabelTextColor: '#ffffff',
 });
 
-candleSeries.attachPrimitive(primitive2);
+candleSeries.attachPrimitive(primitive);
+
+window.setTimeout(() => {
+	primitive.applyOptions({
+		otherLinesShowLabels: true,
+	});
+}, 3000);
+
+// window.setTimeout(() => {
+// 	primitive2.applyOptions({
+// 		otherLines: ['20'],
+// 	});
+// }, 2000);
 
 let j = 0;
 // /*
