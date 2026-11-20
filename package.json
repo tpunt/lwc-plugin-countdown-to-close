@@ -1,5 +1,5 @@
 {
-  "name": "lwc-plugin-countdown-to-close",
+  "name": "@tpunt/lwc-plugin-countdown-to-close",
   "version": "2.0.0",
   "type": "module",
   "main": "./dist/lwc-plugin-countdown-to-close.umd.cjs",
@@ -20,10 +20,16 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tpunt/lwc-plugin-countdown-to-close.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "dev": "vite --config src/vite.config.js",
     "compile": "tsc && node compile.mjs",
-    "prepare": "npm run compile",
     "prepublishOnly": "npm run compile"
   },
   "devDependencies": {

@@ -110,6 +110,7 @@ pluginsToBuild.forEach(file => {
 		copyFileSync(typingFilePath, resolve(compiledFolder, `${file.exportName}.d.cts`));
 	} catch (e) {
 		console.error('Error generating typings for: ', file.exportName);
+		throw e;
 	}
 });
 const endTime = Date.now().valueOf();
