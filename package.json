@@ -1,5 +1,5 @@
 {
-  "name": "@tpunt/lwc-plugin-countdown-to-close",
+  "name": "@trading-client/lwc-plugin-countdown-to-close",
   "version": "2.0.0",
   "type": "module",
   "main": "./dist/lwc-plugin-countdown-to-close.umd.cjs",
@@ -20,10 +20,6 @@
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tpunt/lwc-plugin-countdown-to-close.git"
-  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },

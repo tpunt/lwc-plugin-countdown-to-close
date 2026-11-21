@@ -11,16 +11,16 @@ Features (3):
 
 ## Installation
 
-The package is published on GitHub Packages. Add `@tpunt:registry=https://npm.pkg.github.com` and a classic personal access token with `read:packages` (`//npm.pkg.github.com/:_authToken=<token>`) to your user `.npmrc`, then:
+The package is published on GitHub Packages. Add `@trading-client:registry=https://npm.pkg.github.com` and a classic personal access token with `read:packages` (`//npm.pkg.github.com/:_authToken=<token>`) to your user `.npmrc`, then:
 
 ```bash
-npm install @tpunt/lwc-plugin-countdown-to-close
+npm install @trading-client/lwc-plugin-countdown-to-close
 ```
 
 ## Usage
 
 ```ts
-import { CountdownToClose, CountdownToCloseOptions, TimeToClose } from '@tpunt/lwc-plugin-countdown-to-close';
+import { CountdownToClose, CountdownToCloseOptions, TimeToClose } from '@trading-client/lwc-plugin-countdown-to-close';
 ```
 
 ## Visual Demo
